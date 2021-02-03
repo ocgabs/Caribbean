@@ -9,7 +9,7 @@ The initial conditions and boundary data can be downloaded from JASMIN:
 
 http://gws-access.ceda.ac.uk/public/recicle/Caribbean/
 
-NB This recipe has be written with the ARCHER HPC INTEL environment in mind.
+NB This recipe has be written with the ARCHER2 HPC Cray environment in mind.
 
 ```
 # Change to some working directory of choice
@@ -37,9 +37,13 @@ echo "Caribbean OCE" >> work_cfgs.txt
 You can fold the ```make_xios``` command into a serial job. NB ```$NETCDF_DIR``` and ```$HDF5_DIR``` must be part of your environment. This should be the case if you've used ```modules``` to setup the netcdf and hdf5 e.g. 
 
 ```
-module swap PrgEnv-cray PrgEnv-intel
+module unload cray-mpich
+module load craype-network-ucx
+module load cray-mpich-ucx
+module load libfabric
 module load cray-hdf5-parallel
 module load cray-netcdf-hdf5parallel
+module load gcc
 ```
 
 At this point you can checkout and compile XIOS or use a version you already have. If you're starting from scratch:
